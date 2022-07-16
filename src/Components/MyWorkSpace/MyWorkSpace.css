@@ -14,3 +14,16 @@
 .showdropdown {
     display: none !important;
 }
+.modal-bg {
+    background:url('/public/images/slide4.jpg');
+}
+.modal-bg .inner-item{
+
+    margin-top: 5rem;
+}
+@media(max-width:768px) {
+    .modal-bg .inner-item{
+
+        margin-top: 5rem;
+    }
+}

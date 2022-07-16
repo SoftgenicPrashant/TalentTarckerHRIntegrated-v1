@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Signup.css'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './Signup.css'
 import { useForm } from "react-hook-form";
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
@@ -11,13 +11,113 @@ import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
+import { RadioGroup, FormLabel, FormControlLabel, Radio, FormControl  } from '@mui/material';
+import axios from 'axios';
+import { toast , ToastContainer} from 'react-toastify';
 const Signup = () => {
-  const { register, handleSubmit,  formState: { errors } } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+
+
+  
+ 
+  const navigate=useNavigate();
+  const { register,formState: { errors } } = useForm();
+  const submithandleform = (e) =>{
+e.preventDefault();
+const defaultemail=user.firstname+"."+user.lastname+"@talenttracker.in";
+axios.post('http://162.240.67.205:5000/api/users',{
+  
+  firstname:user.firstname,
+  lastname:user.lastname,
+  email:user.email,
+  password:user.password,
+  gender:user.gender,
+  cLocation:user.cLocation,
+  countryCode:user.countryCode,
+  number:user.number,
+  Aemail:defaultemail
+ })
+ .then((response) => {
+  if (response && response.status === 200) {
+  
+    console.log(response.data)
+    if (response.data) {
+     
+      const data = response.data;
+      console.log(data)
+      alert("sucessfully inserted")
+  
+navigate('/');
+    
+    }
+  }
+})
+.catch((error) => {
+
+  if (
+    error.response &&
+    error.response.data &&
+    error.response.status
+  ) {
+    console.log(error.response.data.status);
+    toast.error("E-mail already exists")
+  }
+  
+});
+
+
+
+ //.then(res=>{
+//   if(res && res.status===200){
+//   alert("sucessfully inserted")
+  
+// navigate('/');
+// }
+// else((error){
+//   if (
+//     error.response &&
+//     error.response.data &&
+//     error.response.status
+//   ) {
+//     console.log(error.response.data.status);
+//     setValidationErrors(true);
+//     setValidationMessage("Invalid Email / Password");
+//     toast.error("incorrect Email & Password")
+//   }
+// });
+
+// })
+
+    
+  } 
+
+
+  const [user, setUser]=useState({
+    firstname:"",
+    lastname:"",
+    email:"",
+    password:"",
+    gender:"",
+    cLocation:"",
+    countryCode:"",
+    number:"",
+    
+  
+  })
+  function handle(e){
+    const newuser={...user}
+    newuser[e.target.id]=e.target.value
+  setUser(newuser)
+  }
+
+
   console.log(errors);
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
+    confirmPassword: "",
+    
+
   });
   
   const handleClickShowPassword = () => {
@@ -38,8 +138,18 @@ const Signup = () => {
   const handleOnChange = value => {
     setPhone(value);
   };
+
+
+
+
+
+
+
+
+
   return (
     <div>
+      <ToastContainer position='top-center' />
     <Container fluid>
         <Row>
         <Col sm={7} className="signup-left">
@@ -47,14 +157,15 @@ const Signup = () => {
             <ul className='list-unstyled'>
                 <li><i className="fas fa-check me-3"></i>Free sign up</li>
                 <li><i className="fas fa-check me-3"></i>Free use of our 2 Million candidate database PAN India</li>
-                <li><i className="fas fa-check me-3"></i>1 recruiter-1 JD in majority cases</li>
+                <li><i className="fas fa-check me-3"></i>Transparency: Client coordination is to be done by you in majority cases</li>
 
-                <li><i className="fas fa-check me-3"></i>Client coordination is to be done by you</li>
-                <li><i className="fas fa-check me-3"></i>100s of new clients and hundreds of new JDs available per week (IT/non IT- PAN India)</li>
-                <li><i className="fas fa-check me-3"></i>Live chat support, phone, whats app, sms support from our HQ/ admin desks</li>
-                <li><i className="fas fa-check me-3"></i>Strong Emailing system for official communications with the clients, admin and candidates.</li>
-                <li><i className="fas fa-check me-3"></i>Transparency, trust and mutual growth as the guided principles</li>
-                <li><i className="fas fa-check me-3"></i>Respect to the talented recruiters and commitment to their career & achieve revenue targets</li>
+                <li><i className="fas fa-check me-3"></i>Exclusive JDs: 1 recruiter- 1 JD in majority cases</li>
+                <li><i className="fas fa-check me-3"></i>Scope: 500+ clients & hundreds of JDs available to unlock every day. (IT/non IT- PAN India)</li>
+                <li><i className="fas fa-check me-3"></i>We are exclusive partner to clients in many cases</li>
+                <li><i className="fas fa-check me-3"></i>Communication: Live chat support, Allocation of SPOC (single point of contact) to you, <span className='mx-4'>phone call, whats app, sms support from our HQ/ admin desks for strong communication</span></li>
+                <li><i className="fas fa-check me-3"></i>Emailing- End-to-End Email communication with clients/candidates through our in-house <span className='mx-4'>portal</span></li>
+                <li><i className="fas fa-check me-3"></i>Vision: To provide Recruiters/Consultancies an assured income per month, build loyalties and <span className='mx-4'>achieve mutual revenue growth</span></li>
+                <li><i className="fas fa-check me-3"></i>Client servicing as the top work ethic</li>
             </ul>
           </Col>
           <Col sm={5} className="signup-right">
@@ -69,23 +180,31 @@ const Signup = () => {
                     <h3 className='fw-bold'>Sign Up</h3>
                     <p className='mb-3 text-muted'>Sign Up For New Account</p>
                   </div>
-                  <Form onSubmit={handleSubmit(onSubmit)}>
-                    <TextField type="text" variant="standard" label="Full Name" fullWidth className='mb-1' 
-                      {...register("Name", { required: "Name is required.",pattern: /^[A-Za-z]+$/i   })}
-                      error={Boolean(errors.Name)}
-                      helperText={errors.Name?.message}
+                  <Form onSubmit={(e)=>submithandleform(e)}  >
+                    <TextField type="text" variant="standard" label="First Name" fullWidth className='mb-1' 
+                      {...register("FirstName", { required: "First Name is required.",pattern: /^[A-Za-z]+$/i   })}
+                      error={Boolean(errors.FirstName)}
+                      helperText={errors.FirstName?.message} value={user.firstname} id='firstname' onChange={(e)=>handle(e)}
                      />
                       {errors?.Name?.type === "pattern" && (
                         <p style={{color:"red", fontSize:"0.75rem"}}>Alphabetical characters only</p>
                       )}
-                    <TextField type="email" variant="standard" label="Comapany Email" fullWidth className='mb-1' />
-                    <TextField type="text" variant="standard" label="Comapny" fullWidth className='mb-1' />
+                    <TextField type="text" variant="standard" label="Last Name" fullWidth className='mb-1' 
+                      {...register("LastName", { required: "Last Name is required.",pattern: /^[A-Za-z]+$/i   })}
+                      error={Boolean(errors.LastName)}
+                      helperText={errors.LastName?.message} value={user.lastname} id='lastname' onChange={(e)=>handle(e)}
+                     />
+                      {errors?.Name?.type === "pattern" && (
+                        <p style={{color:"red", fontSize:"0.75rem"}}>Alphabetical characters only</p>
+                      )}
+                    <TextField type="email" variant="standard" label="Personal Email/Work Email" fullWidth className='mb-1' value={user.email} id='email' onChange={(e)=>handle(e)}/>
                     <br></br>
                     <br></br>
                     <Input 
                       type={values.showPassword ? "text" : "password"}
-                      onChange={handlePasswordChange("password")}
-                      value={values.password}
+                      onChange={(e)=>handle(e)}
+                      value={user.password}
+                      id="password"
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -96,14 +215,15 @@ const Signup = () => {
                           </IconButton>
                         </InputAdornment>
                       }
-                      fullWidth variant="standard" placeholder='Password'
+                      fullWidth variant="standard" placeholder='Password' name='password'
                     />
                     <br></br>
                     <br></br>
                     <Input 
                       type={values.showPassword ? "text" : "password"}
-                      onChange={handlePasswordChange("password")}
-                      value={values.password}
+                      onChange={(e)=>handle(e)}
+                      id="confirmpassword"
+                      
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -116,20 +236,41 @@ const Signup = () => {
                       }
                       fullWidth variant="standard" placeholder='Confirm Password'
                     />
-
+        <TextField type="address" variant="standard" label="Current location" fullWidth className='mb-1' 
+                      {...register("Location", { required: "Current Location is required."  })}
+                      error={Boolean(errors.Location)}
+                      helperText={errors.Location?.message}
+                    id='cLocation' value={user.cLocation} onChange={(e)=>handle(e)} />
                     <Row>
                         <Col xs={5} className="mt-3">
                           
                         <MuiPhoneNumber defaultCountry={"in"} onChange={handleOnChange} name="countrycode" />                  
                         </Col>
                         <Col xs={7} className="mb-3">
-                        <TextField type="tel" variant="standard" label="Number" fullWidth        onKeyPress={(event) => {
+                        <TextField type="tel" variant="standard" label="Number" fullWidth onKeyPress={(event) => {
         if (!/[0-9]/.test(event.key)) {
           event.preventDefault();
+        toast.error("Only numbers allowed")
         }
-      }} />
+       
+      }} id='number' value={user.number} onChange={(e)=>handle(e)}/>
                         </Col>
                     </Row>
+
+      <FormControl >
+      <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue="female"
+        name="radio-buttons-group"
+        className='d-flex' 
+      ><div className='d-flex'>
+        <FormControlLabel value="Female" id="Female" control={<Radio />} label="Female" name='gender' onChange={(e)=>handle(e)}/>
+        <FormControlLabel value="Male" id="Male" control={<Radio />} label="Male" name='gender' onChange={(e)=>handle(e)} />
+        </div>
+      </RadioGroup>
+    </FormControl>
+                    
                     <div className='mb-3 d-flex'>
                       <span className='me-auto'><Link to="/" style={{textDecoration:'none'}}>Already Have account?</Link></span>
                     </div>

@@ -11,7 +11,7 @@ const MyProfile = () => {
         <Sidebar />
         <Container className='myprofile'>
             <Row>
-                <Col sm={3}>
+                <Col sm={4}>
                     <div className='sidebar'>
                         <Card>
                             <Card.Body>
@@ -20,6 +20,8 @@ const MyProfile = () => {
                                     <li><i className="fas fa-file-invoice me-2"></i><Link to="/Admin-Assigned-Information">Admin Assigned</Link></li>
                                     <li><i className="fas fa-cog me-2"></i> <Link to="/Settings">Settings</Link></li>
                                     <li><i className="fas fa-lock me-2" /><Link to="/ChangePassword">Change Password</Link></li>
+                                    <li><i className="fas fa-mail-bulk  me-2"></i><Link to="/setup-mailbox">Set up Mailbox in<br></br>  Outlook/Android phone</Link></li> 
+                                    
                                     <li><i className="fas fa-sign-out-alt me-2"></i><Link to="/Unsubscribe">Unsubscribe</Link></li>
                                 </ul>
                             </Card.Body>

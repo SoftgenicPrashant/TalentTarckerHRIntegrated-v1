@@ -1,10 +1,42 @@
 import React from 'react'
-import { Button, Navbar, Nav, Container, Dropdown, ProgressBar } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Button, Navbar,NavDropdown, Nav, Container, Dropdown, ProgressBar } from 'react-bootstrap'
+import { Link, useParams } from 'react-router-dom'
 import "./Navbar.css"
 import useLocalStorage from 'use-local-storage'
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 const NavbarMenu = () => {
+ const id = localStorage.getItem("id")
   const [theme] = useLocalStorage('theme' ? 'dark' : 'topnav')
+ const email=localStorage.getItem('email')
+ const time=localStorage.getItem('time')
+//const [email, Setemail]=useState([])
+const [name, Setname]=useState([])
+const [lname, Setlname]=useState([])
+const [userid, setuserId]=useState([])
+const [cat, setcat]= useState([])
+const [rating, setrating]=useState([])
+
+useEffect(() => {
+  const fetchuser = async () =>{
+    const res = await axios.get(`http://162.240.67.205:5000/api/usersbyId/${id}`);
+    Setname(res.data.firstname);
+    Setlname(res.data.lastname);
+    setuserId(res.data.userId);
+    setcat(res.data.Acategory);
+  }
+  fetchuser();
+},[]);
+useEffect(() => {
+  const fetchPosts = async () =>{
+    const res = await axios.get(`http://162.240.67.205:5000/api/viewRating`);
+  
+  setrating(res.data);
+  }
+  fetchPosts();
+},[]);
+
+
   return (
     <div >
     <Navbar expand="lg" className='topnav' fixed='top' data-theme={theme}>
@@ -14,7 +46,24 @@ const NavbarMenu = () => {
     <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="ms-auto" >
       <Nav.Link as={Link} to="/Theme"><i className="fas fa-sun"></i></Nav.Link>
-      <Nav.Link href="#features"><i className="fas fa-life-ring"></i></Nav.Link>
+      <Dropdown>
+  <Dropdown.Toggle variant="secondry" id="dropdown-basic" className='text-white'>
+  <i className="fas fa-life-ring"></i>
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+  <NavDropdown.Item href="#action/3.1">Start live chat</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.2">SMS</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.3">Whatsapp</NavDropdown.Item>
+          
+          <NavDropdown.Item href="#action/3.4">Best practices in candidate sourcing</NavDropdown.Item> 
+          <NavDropdown.Item href="#action/3.4">Guidelines to use the platform</NavDropdown.Item> 
+          <NavDropdown.Item href="#action/3.4">Do's & Don't</NavDropdown.Item> 
+  
+   
+  </Dropdown.Menu>
+</Dropdown>
+      {/* <Nav.Link href="#features"><i className="fas fa-life-ring"></i></Nav.Link> */}
       <Dropdown>
         
       <Dropdown.Toggle variant="secondry" id="dropdown-basic" className='text-white'>
@@ -33,6 +82,8 @@ const NavbarMenu = () => {
   <Dropdown.Item as={Link} to="/Settings"><i className="fas fa-comment-alt me-2"></i>Notify me</Dropdown.Item> 
   <Dropdown.Item as={Link} to="/ChangePassword" ><i className="fas fa-lock me-2"></i>Change Password</Dropdown.Item> 
   <Dropdown.Item as={Link} to="/Unsubscribe" ><i className="fas fa-sign-out-alt me-2"></i>Unsubscribe</Dropdown.Item> 
+  <Dropdown.Item as={Link} to="/setup-mailbox" ><i className="fas fa-mail-bulk  me-2"></i>Set up Mailbox in<br></br>  Outlook/Android phone</Dropdown.Item> 
+
   <Dropdown.Item as={Link} to="/Theme" ><i className="fas fa-palette me-2"></i>Theme</Dropdown.Item> 
   </Dropdown.Menu>
   </Dropdown>
@@ -42,30 +93,37 @@ const NavbarMenu = () => {
       <Nav>
         <Dropdown>
   <Dropdown.Toggle variant="secondry" id="dropdown-basic" className='text-white'>
-   user@exampl.com <i className="fas fa-angle-down"></i>
+  {email} <i className="fas fa-angle-down"></i>
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <h4 className='text-center fw-bold' >Pkrs</h4>
+    <h4 className='text-center fw-bold' >{name} {lname}</h4>
     <div className='d-flex justify-content-center'>
       <Link to='/logout'><Button variant='danger'>Logout</Button></Link>
     </div>
    <div className='d-flex justify-content-center mt-2'>
-      <small className='text-muted text-center'>Last login: 08-05-22</small>
+      <small className='text-muted text-center'>Last login: {time}</small>
    </div>
-  
+
+
    <Dropdown.Divider />
-   <p className='h6 '>Category <span style={{textAlign:'right', float:'right'}}>A</span></p>
-   <p className='h6 mt-3 mb-3'>User ID <span style={{textAlign:'right', float:'right'}}>0012</span></p>
+   <p className='h6 '>Category <span style={{textAlign:'right', float:'right'}}>{cat}</span></p>
+   <p className='h6 mt-3 mb-3'>User ID <span style={{textAlign:'right', float:'right'}}>{userid.slice(3)}</span></p>
    <Dropdown.Divider />
-   <p className='h6 mt-3 mb-3'>User Name <span style={{textAlign:'right', float:'right'}}>pkrs</span></p>
+   <p className='h6 mt-3 mb-3'>User Name <span style={{textAlign:'right', float:'right'}}>{name}</span></p>
    <Dropdown.Divider />
    <h5 className='mt-3 mb-3'>My Rating</h5>
-   <ProgressBar now={10}  className="mt-3 mb-3" label="5" />
+   {rating.map((userrating)=>{
+    if(userrating.userId==userid){
+    return(<>
+    
+   <ProgressBar now={10*userrating.rating}  className="mt-3 mb-3" label={userrating.rating} />
+   </>)}
+   })}
    <Dropdown.Divider />
-   <a href='http://filterpage.com'>Filter  the JD matching your selection criteria <i className='fas fa-filter ms-2'></i></a>
+   <a href='http://filterpage.com'>Filter Talent Tracker's Candidate Database <i className='fas fa-filter ms-2'></i></a>
    <Dropdown.Divider />
-   <a href="https://cpanel.com" className='fw-bold'>Link for email <i className="fab fa-cpanel fa-4x ms-2"></i></a>
+   <a href="https://login.bluehost.com/hosting/webmail" className='fw-bold'>Link for Webmail <i className="fab fa-cpanel fa-4x ms-2"></i></a>
   </Dropdown.Menu>
 </Dropdown>
 </Nav>

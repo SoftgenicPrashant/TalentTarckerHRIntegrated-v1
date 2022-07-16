@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Test from "./Components/Test"
 import AdminAssigned from "./Components/AdminAssigned/AdminAssigned";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import ScrollToTop from "./Components/ScrollToTop";
@@ -38,6 +39,13 @@ import MydashboardThisWeek from "./Components/Pages/MydashboardThisWeek";
 import Mydashboard from "./Components/Pages/Mydashboard";
 import FilterStudent from "./Components/ListOfCandidate/FilterStudent";
 import HandlebyMe from "./Components/Pages/HandlebyMe";
+import MyCandidate from "./Components/MyCandidate/MyCandidate";
+import Template from "./Components/Pages/Template";
+import MyWorkspaceEdit from "./Components/MyWorkSpace/MyWorkspaceEdit";
+import MyWorkspaceFilter from "./Components/MyWorkSpace/MyWorkspaceFilter";
+import Myofferedit from "./Components/Pages/Myofferedit";
+import Setupmailbox from "./Components/Pages/Setupmailbox";
+import Filtercandidate from "./Components/MyCandidate/Filtercandidate";
 function App() {
 
   return (
@@ -47,10 +55,15 @@ function App() {
       <ScrollToTop />
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/Editstudent" element={<EdirStudent />} />
+      <Route path="/test" element={<Test />} />
+      <Route path="/templatelist" element={<Template />} />
+      <Route path="/Editcandidate" element={<EdirStudent />} />
+      <Route path="/Mycandidates" element={<MyCandidate />} />
       <Route path="/Myoffer" element={<Myoffer />} />
       <Route path="/Handlebyme" element={<HandlebyMe />} />
       <Route path="/FilterStudent" element={<FilterStudent />} />
+      <Route path="/MyWorkspace/edit" element={<MyWorkspaceEdit />}/>
+      <Route path="/MyWorkspace/filter" element={<MyWorkspaceFilter />}/>
       <Route path="/MyDashoard" element={<Mydashboard />} />
       <Route path="/MyDashoardThisWeek" element={<MydashboardThisWeek />} />
       <Route path="/ForgotPassword" element={<ForgotPassord />} />
@@ -69,7 +82,7 @@ function App() {
       <Route path="/Theme" element={<Theme />}/>
       <Route path="/List-of-JDs" element={<ListOfJd />} />
       <Route path="/My-Work-Space" element={<MyworkSpace />} />
-      <Route path="/Reports" element={<Reports />} />
+      {/* <Route path="/Reports" element={<Reports />} /> */}
       <Route path="/Profile" element={<Profile />} />
       <Route path="/submit" element={<Submit />} />
       <Route path="/Dashbaord/thismonth" element={<DasboardThisMonth />} />
@@ -78,6 +91,9 @@ function App() {
       <Route path="/Dashbaord/lastquarter" element={<DasboardThisquarter/>} />
       <Route path="/Dashbaord/lastyear" element={<DashboardLastyear/>} />
       <Route path="/jdlist2" element={<Listofjd2/>} />
+      <Route path="/myoffer-edit" element={<Myofferedit/>} />
+      <Route path="/setup-mailbox" element={<Setupmailbox/>}/>
+      <Route path="/Filter-my-candidate" element={<Filtercandidate/>}/>
     </Routes>
   </BrowserRouter>
 

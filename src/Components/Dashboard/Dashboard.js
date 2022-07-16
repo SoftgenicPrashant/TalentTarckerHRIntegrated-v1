@@ -1,22 +1,39 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Sidebar from '../Sidebar/Sidebar'
 import NavbarMenu from '../NavbarMenu/NavbarMenu'
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate,useParams } from 'react-router-dom'
 import useLocalStorage from 'use-local-storage'
 import CookieConsent from "react-cookie-consent";
 import "./Dashboard.css";
+import { useState } from 'react'
+import axios from 'axios';
 const Dashboard = () => {
+    //fetch Id
+    
+    const id=localStorage.getItem('id')
+
+    let logedin=true;
+   
+console.log(id)
+    useEffect(() => {
+      const fetchPosts = async () =>{
+        const res = await axios.get(`http://localhost:4000/api/usersbyId/${id}`);
+        
+      }
+      fetchPosts();
+    },[id]);
   
-    const token = localStorage.getItem("token")
-    let loggedIn = true
-    if(token ==  null){
-      loggedIn= false
-    }
+   
     const [theme] = useLocalStorage('theme' ? 'dark' : 'light')
+    let gettoken=localStorage.getItem('token')
+    if(gettoken==null){
+        logedin=false;
+    }
+    
   return (
     <div className='dashboard'  data-theme={theme}>
-        {loggedIn? <></>: <Navigate to="/"/>}
+      {logedin? <></>: <Navigate to="/"/>}
                <CookieConsent
   location="bottom"
   buttonText="I accepted"
@@ -32,7 +49,7 @@ const Dashboard = () => {
       <NavbarMenu />
       <Container className='right-report-container'>
             <div>
-            <Link to="/Dashbaord"><Button variant="secondary" className='mt-3 mx-3'>Today</Button></Link>
+            <Link to="/Dashbaord/id"><Button variant="secondary" className='mt-3 mx-3'>Today</Button></Link>
             <Link to="/Dashbaord/thisweek"><Button variant="outline-secondary" className='mt-3 mx-3'>This Week</Button></Link>
             <Link to="/Dashbaord/thismonth"><Button variant="outline-secondary" className='mt-3 mx-3'>This Month</Button></Link>
             <Link to="/Dashbaord/lastmonth"><Button variant="outline-secondary" className='mt-3 mx-3'>Last Month</Button></Link>

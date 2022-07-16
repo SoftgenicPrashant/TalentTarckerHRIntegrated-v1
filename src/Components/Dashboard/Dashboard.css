@@ -37,7 +37,7 @@
 }
 @media(max-width:420px){
     .right-report-container {
-        margin-top: -30rem;
+        margin-top: -25rem;
     }
   
     .right-report-container .row .col-sm-4 {
@@ -46,7 +46,7 @@
 }
 @media(max-width:390px){
     .right-report-container {
-        margin-top: -25rem;
+        margin-top: -23rem;
     }
   
   

@@ -1,6 +1,7 @@
 
 .topnav {
     background-color:  #7367f0;
+    height: 4rem;
 }
 [data-theme='dark'] {
     background-color: rgb(0, 0, 0) !important;

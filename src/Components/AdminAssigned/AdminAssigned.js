@@ -50,7 +50,7 @@ const handleSelect2 = () => {
                         <Col xs={4}>
                        <Form.Group>
                            <Form.Label className='mt-2' >My User ID </Form.Label>
-                           <Form.Control type='number' value="002" name="user_id" />
+                           <Form.Control type='number' value="002" name="user_id" disabled />
                        </Form.Group>
         
                         </Col>
@@ -58,7 +58,7 @@ const handleSelect2 = () => {
                    
                        <Form.Group>
                            <Form.Label className='mt-2' >My category</Form.Label>
-                           <Form.Control type='text' defaultValue="C" name="category"  />
+                           <Form.Control type='text' defaultValue="C" name="category" disabled  />
                        </Form.Group>
                    
                         </Col>
@@ -66,7 +66,7 @@ const handleSelect2 = () => {
                         
                        <Form.Group>
                            <Form.Label className='mt-2' >My official email ID  </Form.Label>
-                           <Form.Control type='email' defaultValue="name@domain.com" name="user_id" />
+                           <Form.Control type='email' defaultValue="name@domain.com" name="user_id" disabled />
                        </Form.Group>
                    
                         </Col>
@@ -76,7 +76,7 @@ const handleSelect2 = () => {
                        
                        <Form.Group>
                            <Form.Label className='mt-2' >Default Email password </Form.Label>
-                           <Form.Control type='password' value="123445" name="user_id" />
+                           <Form.Control type='password' value="123445" name="user_id" disabled />
                        </Form.Group>
                
                         </Col>
@@ -92,13 +92,13 @@ const handleSelect2 = () => {
 
                        <Form.Group>
                            <Form.Label className='mt-2' >Admin’s CVs quality check </Form.Label>
-                           <Form.Control type='text' defaultValue="No" name="cv_check" />
+                           <Form.Control type='text' defaultValue="No" name="cv_check"  disabled/>
                        </Form.Group>
                         </Col>
                         <Col xs={6}>
                        <Form.Group>
                            <Form.Label className='mt-2' >Am I privileged to see the full content of JD before I pick/lock it?</Form.Label>
-                           <Form.Control type='text' defaultValue="yes" name="jd_lock" />
+                           <Form.Control type='text' defaultValue="yes" name="jd_lock" disabled />
                        </Form.Group>
                         </Col>
                     </Row>
@@ -107,13 +107,13 @@ const handleSelect2 = () => {
 
                        <Form.Group>
                            <Form.Label className='mt-2' >What will be my designation in the email signature for client/candidate coordination</Form.Label>
-                           <Form.Control type='text' defaultValue="Recruiter" name="designation"  />
+                           <Form.Control type='text' defaultValue="Recruiter" name="designation" disabled />
                        </Form.Group>
                         </Col>
                         <Col xs={6}>
                        <Form.Group>
                            <Form.Label className='mt-2' >Allow user to remove candidate’s mobile number from the tracker sheet</Form.Label>
-                           <Form.Control type='text'  name="removecandidate" />
+                           <Form.Control type='text'  name="removecandidate" disabled />
                        </Form.Group>
                         </Col>
                     </Row>
@@ -121,30 +121,78 @@ const handleSelect2 = () => {
                         <Col xs={6}>
 
                        <Form.Group>
-                           <Form.Label className='mt-2' >Allow user to write special remarks, comments in the tracker sheet</Form.Label>
-                           <Form.Control type='text'  name="specialremarks" />
+                           <Form.Label className='mt-2' >Am I allowed user to write special remarks, comments in the tracker sheet?</Form.Label>
+                           <Form.Control type='text' defaultValue="No" name="comment" disabled />
                        </Form.Group>
                         </Col>
                         <Col xs={6}>
-                       <Form.Group>
+                       <Form.Group className='mt-3'>
                            <Form.Label className='mt-2' >Am I allowed to give One candidate submissiont?</Form.Label>
-                           <Form.Control type='text' defaultValue="No" name="candidatesubmissiont" />
+                           <Form.Control type='text' defaultValue="No" name="candidatesubmissiont" disabled />
                        </Form.Group>
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={6}>
-                            <Form.Group>
+
+                      
+                           <Form.Label className='mt-2' >Am I allowed to update the 'status' field in my workspace?</Form.Label>
+                            <Form.Control value="No" disabled />
+                      
+                        </Col>
+                        <Col xs={6}>
+                        <Form.Label className='mt-2' >Am I allowed to do the client coordination on case to case basis?</Form.Label>
+                        <Form.Control value="No" disabled />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group className='mt-3'>
                                 <Form.Label className='mt-2'>How many mobile numbers I can unlock in a day if I am using Talent Tracker’s Candidate Database</Form.Label>
-                                <Form.Control type='number' defaultValue="25" name="numberunlock"  />
+                                <Form.Control type='number' defaultValue="25" name="numberunlock" disabled  />
                             </Form.Group>
                             
                         </Col>
-                        
+
+                        <Col md={6}>
+                            <Form.Group className='mt-3'>
+                                <Form.Label>Based on my KYC, I am assigned as a </Form.Label>
+                                <Form.Control value="Consultancy" disabled />
+                                    {/* <option value="consultancy">Consultancy</option>
+                                    <option value="individual">Individual</option> */}
+                                {/* </Form.Select> */}
+                            </Form.Group>
+                        </Col>
                     </Row>
-                    <div className='d-flex'>
-                    <Button variant='primary' className='mt-3'>save</Button><Button variant='secondary' className='mt-3 mx-3' >edit</Button>
-                    </div>
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group className='mt-3'>
+                                <Form.Label className='mt-2'>Am I assigned a fixed payout irrespective of the JD I handle? </Form.Label>
+                                <Form.Control value="Yes, I am assigned a fix payout" disabled />
+                                    {/* <option value="Yes, I am assigned a fix payout">Yes, I am assigned a fix payout</option>
+                                    <option value="No, it will change from JD to JD">No, it will change from JD to JD</option> */}
+                                {/* </Form.Select> */}
+                            </Form.Group>
+                            
+                        </Col>
+
+                        <Col md={6}>
+                            <Form.Group className='mt-3'>
+                                <Form.Label>Am I allowed to view Client SPOC’s mobile number in the JD </Form.Label>
+                                    <Form.Control defaultValue="yes" disabled/>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        
+                    <Col md={6}>
+                            <Form.Group className='mt-3'>
+                                <Form.Label>Am I allowed to do the CVs submission to the client?   </Form.Label>
+                                    <Form.Control defaultValue="yes" disabled />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
                     </Form>
                 </Tab>
                 <Tab eventKey="personal information" title="Personal Information" >
@@ -275,7 +323,7 @@ const handleSelect2 = () => {
                         </Col>
                         <Col xs={4}>
                         <Form.Group className='mb-3 mt-2'>
-                           <Form.Label>Currently employed for some organization as a full time employee</Form.Label>
+                           <Form.Label>Currently employed for some organization as a full time employee?</Form.Label>
                            <div className='d-flex'>
                            <Form.Check type='radio'  name="currentlyemployed" label="Yes"/>
                            <Form.Check type='radio'  name="currentlyemployed" label="No" className='mx-3'/>

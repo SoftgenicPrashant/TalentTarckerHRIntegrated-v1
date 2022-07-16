@@ -5,14 +5,14 @@ import {
     Menu,
     MenuItem,
     SidebarHeader,
-
+    SubMenu,
     SidebarContent,
 
   } from "react-pro-sidebar";
   //import icons from react icons
 
 import {MdWorkOutline} from 'react-icons/md'
-  import {FaListAlt, FaUserAlt} from 'react-icons/fa'
+  import {FaListAlt, FaUserAlt,FaUserTie} from 'react-icons/fa'
   import {AiFillDashboard} from 'react-icons/ai'
 import {BsCardChecklist} from 'react-icons/bs'
   import 'react-pro-sidebar/dist/css/styles.css';
@@ -43,15 +43,22 @@ const Sidebar = () => {
                <Link to='/Dashbaord'>Dashboard</Link> 
               </MenuItem>
               <MenuItem active={true} icon={<BsCardChecklist />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>
-               <Link to='/jdlist2'>List of JD's</Link> 
+               <Link to='/jdlist2'>List of JDs</Link> 
               </MenuItem>
               <MenuItem active={true} icon={<MdWorkOutline />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>
                <Link to='/My-Work-Space'>My Workspace</Link> 
               </MenuItem>
-              <MenuItem active={true} icon={<FaListAlt />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>
-               <Link to='/Reports'>Reports</Link> 
+              <MenuItem active={true} icon={<FaUserTie />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>
+               <Link to='/Mycandidates'>My Candidates</Link> 
               </MenuItem>
-
+             
+              <SubMenu title='Reports' active={true} icon={<FaListAlt />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>
+              <MenuItem  icon={<FaListAlt />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>               <Link to='/Myoffer'>Offer</Link> </MenuItem>
+            <MenuItem active={true} icon={<FaListAlt />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>               <Link to='/MyDashoard'>Dashboard</Link> </MenuItem>
+            <MenuItem active={true} icon={<FaListAlt />} onMouseEnter={()=>setMenuCollapse(false)} onMouseLeave={()=>setMenuCollapse(true)}  data-theme={theme}>               <Link to='/HandleByMe'>Handle By Me</Link> </MenuItem>
+               
+              </SubMenu>
+              
             </Menu>
           </SidebarContent>
     

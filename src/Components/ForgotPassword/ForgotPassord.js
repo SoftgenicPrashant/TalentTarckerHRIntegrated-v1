@@ -46,7 +46,7 @@ const ForgotPassord = () => {
                 <TextField type="email" id="standard-basic" name='username' label="Enter your registered email" variant="standard" onChange={(e)=>setusername(e.target.value)}  fullWidth />
                     
                     <div className='mb-4 d-flex mt-3'>
-                      <span className='me-auto '><Link to="/Signup" style={{textDecoration:'none'}}>Neead an account?</Link></span>
+                      <span className='me-auto '><Link to="/Signup" style={{textDecoration:'none'}}>Need an account?</Link></span>
                       <span className='ms-auto'><Link to="/" style={{textDecoration:'none'}}>Login</Link></span>
                     </div>
                     <Button variant="primary" type="submit" className='mb-3'>

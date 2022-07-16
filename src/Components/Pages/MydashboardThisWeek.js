@@ -1,9 +1,9 @@
 import React from 'react'
 import NavbarMenu from "../NavbarMenu/NavbarMenu"
 import Sidebar from "../Sidebar/Sidebar"
-import {Container, Table, Dropdown} from "react-bootstrap"
+import {Container, Table, Dropdown, Button} from "react-bootstrap"
 import {Link} from "react-router-dom"
-
+import {CSVLink} from "react-csv"
 const MydashboardThisWeek = () => {
     const DashboardList= [
         {date:"23-05-2022",mobilenumbers:"3", JDslocked:"100",interviewstage:"50",successfulclosures:"30",offerstage:"20",delivered:"90", pendingdelivery:"30",JDrework:"89", rating:"110", totalpayouts:"200"},
@@ -15,6 +15,10 @@ const MydashboardThisWeek = () => {
         {date:"29-05-2022",mobilenumbers:"8", JDslocked:"800",interviewstage:"50",successfulclosures:"10",offerstage:"20",delivered:"90", pendingdelivery:"30",JDrework:"89", rating:"110", totalpayouts:"200"}
     
       ]
+      const csvReport = {
+        filename: 'Dashboardtable.csv',
+        data: DashboardList
+    }
   return (
     <div>
         <NavbarMenu />
@@ -22,9 +26,9 @@ const MydashboardThisWeek = () => {
       <Container style={{marginTop:"8rem"}}>
         <h4 className='text-center'>List Of Dashboard</h4>
         <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic" className='mb-3'>
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic" className='mb-3' size='sm'>
             This Week
-          </Dropdown.Toggle>
+          </Dropdown.Toggle><CSVLink {...csvReport} style={{textDecoration:"none", color:"white"}}><Button className='mx-2 mb-3 btn btn-warning' size='sm'><i className='fas fa-filter'/>CSV Download</Button></CSVLink>
 
           <Dropdown.Menu>
             <Dropdown.Item as={Link} to="/MyDashoard">Today</Dropdown.Item>

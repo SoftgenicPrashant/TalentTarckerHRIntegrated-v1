@@ -52,12 +52,19 @@
     font-weight: 700;  
 }
 .deatail{
+    
     font-weight: 600;
     color: rgb(103, 103, 248);
 }
 .deatail span{
     color: rgb(57, 57, 60);
     font-weight: 400;
+    display: flex;
+}
+.deatail a {
+    text-decoration: none;
+    color: rgb(96, 94, 94);
+    font-weight: 500;
 }
 .deatail span i {
     padding: auto;
@@ -94,10 +101,15 @@
 .table-data thead tr th {
     padding-bottom: 0 !important;
     background-color:#eceff1;
+    font-size: small;
+    word-wrap:normal;
+    font-weight: 0;  
 }
 .table>:not(caption)>*>* {
     padding-bottom: 0 !important;
     border-bottom: 0.2px solid rgb(152, 152, 152) !important;
+    padding-right: 0 !important;
+    position: relative;
 }
 /* width */
 ::-webkit-scrollbar {

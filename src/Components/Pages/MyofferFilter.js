@@ -57,6 +57,7 @@ const MyofferFilter = () => {
               <div className='d-flex justify-content-center title-absolute py-4 border-top'>
                         <Button variant='secondary' className='mx-3 text-white'>Reset</Button>
                         <Link to='/Myoffer'><Button variant='primary' className='mx-3 text-white'>Search</Button></Link>
+
                         <Link to='/'><Button variant='danger' className='mx-3 text-white'>Colse</Button></Link>
             </div>
               </Form>

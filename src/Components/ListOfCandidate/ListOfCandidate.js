@@ -1,53 +1,49 @@
 
-import React from 'react'
+import React,{ useState} from 'react'
 import {CSVLink} from "react-csv"
-import { Container , Form, Table, Button} from 'react-bootstrap'
+import { Container , Form, Table, Button,Modal} from 'react-bootstrap'
 import NavbarMenu from '../NavbarMenu/NavbarMenu'
 import Sidebar from '../Sidebar/Sidebar'
 import '../ListOfJd/ListOfJd.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom'
 const ListOfCandidate = () => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+   
     const Studentlist = [
         {id:1, jdno:"2", Clientname:"prashant Kumar",JDtitle:"Automobile",JDlocation:"Patna",RecruiterID:"001",Candidatename:"Prashant", Currentdesignation:"n/a",Currentsalary:"null", LastAppraisal:"18-may-2022"},
         {id:2, jdno:"003", Clientname:"neeraj Kumar", JDtitle:"Automobile",JDlocation:"Ranchi", RecruiterID:"002",Candidatename:"Neeraj", Currentdesignation:"n/a", Currentsalary:"null",LastAppraisal:"19-may-2022"},
         {id:3, jdno:"33", Clientname:"prashant Kumar", JDtitle:"Automobile",JDlocation:"Haryana",RecruiterID:"003", Candidatename:"Prashant", Currentdesignation:"n/a", Currentsalary:"null", LastAppraisal:"20-may-2022"},
         {id:4, jdno:"33", Clientname:"dd Kumar", JDtitle:"Automobile",JDlocation:"Delhi", RecruiterID:"004", Candidatename:"Prashant", Currentdesignation:"n/a",Currentsalary:"null",LastAppraisal:"21-may-2022"}
     ]
-    const headers = [
-        {lable:"Candidate ID ", key:"id"},
-        {label:"JD number ", key:"jdno"},
-        {label:"Client Name", key:"Clientname"},
-        {label:"JD Title", key:"JDtitle"},
-        {label:"JD location", key:"JDlocation"},
-        {label:"Recruiter ID", key:"RecruiterID"},
-        {label:"Candidate Name", key:"Candidatename"},
-        {label:"Current designation", key:"Currentdesignation"},
-        {label:"Currentsalary", key:"Currentsalary"},
-        {label:"Last Appraisal of the candidate", key:"LastAppraisal"},
-
-    ]
     const csvReport = {
         filename: 'Studentlist.csv',
-        headers: headers,
         data: Studentlist
     }
+  
+    const [select, setselect]= useState({});
+ 
+  
   return (
     <div>
         <NavbarMenu />
         <Sidebar />
         <ToastContainer position='top-center' />
         <Container style={{marginTop:'8rem'}}>
-        <h2 className='text-center'>List Of Candidate</h2>
+        <h2 className='text-center'>List Of Candidates</h2>
         </Container>
         
         <div className='jd-wraper' >
         
             <Container  className='table-data' fluid >
             <Button className='mb-2'><CSVLink {...csvReport} style={{textDecoration:"none", color:"white"}}><i className='fas fa-download' /></CSVLink></Button>
-            <Button className='btn btn-success mb-2 mx-2' onClick={()=>{toast.dark("Cuurently not added to trackersheet :(")}}>Add to tracker sheet</Button>
+            <Button className='btn btn-success mb-2 mx-2' onClick={()=>{toast.dark(select)}}>Add to tracker sheet</Button>
             <Button className='btn btn-warning mb-2 mx-2' as={Link} to="/FilterStudent"><i className='fas fa-filter me-2'/> Filter </Button>
-                <Table responsive className='data-table' hover >
+            <Button className='btn btn-dark mb-2 mx-2 me-auto'><i className='fas fa-close me-2'/> Close </Button>
+
+                <Table className='data-table' hover >
                     <thead >
                         <tr>
                             <th>*</th>
@@ -59,10 +55,12 @@ const ListOfCandidate = () => {
                             <th>Recruiter ID </th>
                             <th>Candidate name </th>
                             <th>Current designation </th>
-                            <th>Current salary </th>
-                            <th>Last Appraisal of the candidate </th>
+                            <th>Current salary (Fix)  </th>
+                            <th>Current salary (Variable)</th>
+                            <th>Total salary</th>
+                            <th >Last Appraisal of the candidate </th>
                             <th>Expected salary </th>
-                            <th>Dropdown</th>
+                            <th>Negotiable?</th>
                             <th>Total experience </th>
                             <th>Education</th>
                             <th>Current organization </th>
@@ -81,7 +79,7 @@ const ListOfCandidate = () => {
                     {Studentlist.map((student)=>{return(
                        <>
                         <tr>
-                            <td><Form.Check type='checkbox' /></td>
+                            <td><Form.Check type='checkbox' value={student.id+ "Row is selected but not added in tracker sheet "} onChange={(e)=>setselect(e.target.value)} /></td>
                             <td>{student.id}</td>
                             <td>{student.jdno}</td>
                             <td>{student.Clientname}</td>
@@ -91,6 +89,8 @@ const ListOfCandidate = () => {
                             <td>{student.Candidatename}</td>
                             <td>{student.Currentdesignation}</td>
                             <td>{student.Currentsalary}</td>
+                            <td>na</td>
+                            <td>na</td>
                             <td>May 2022</td>
                             <td>1 lacs/annum</td>
                             <td>Negotiable</td>
@@ -107,8 +107,8 @@ const ListOfCandidate = () => {
                             <td>Good</td>
                             <td>
                             <div className='d-flex'>
-                            <Button variant='outline-danger' onClick={()=>{toast.error("Currently you cannot not delete table item without backend intigration")}}><i className='fas fa-trash'/></Button> 
-                            <Button variant='outline-secondary' className='mx-2' as={Link} to="/Editstudent"><i className='fas fa-pen'/></Button>
+                            <Button variant='outline-danger' onClick={handleShow}><i className='fas fa-trash'/></Button> 
+                            <Button variant='outline-secondary' className='mx-2' as={Link} to="/Editcandidate"><i className='fas fa-pen'/></Button>
                             </div>
                             </td>
                         </tr>
@@ -117,7 +117,24 @@ const ListOfCandidate = () => {
                     </tbody>
              
                 </Table> 
+
         </Container>
+        <Modal show={show} onHide={handleClose} size='lg'>
+        <Modal.Header closeButton>
+          <Modal.Title> <i className="fas fa-user me-3" ></i>Are you sure you wish to delete this candidate from the list ?</Modal.Title>
+        </Modal.Header>
+        
+        <Modal.Footer>
+        <Button variant="primary" onClick={()=>toast.success("saved")}>
+            Yes
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      
         </div>
     </div>
   )

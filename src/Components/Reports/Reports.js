@@ -20,7 +20,7 @@ const Reports = () => {
       <Container className='table-data'>
         <Row className='mt-5'>
           <Col sm={4}>
-            <Link to="/MyOfferFilter" style={{textDecoration:"none"}}><Card >
+            <Link to="/Myoffer" style={{textDecoration:"none"}}><Card >
               <Card.Body>
                 <Card.Title>My offers </Card.Title>
               </Card.Body>
@@ -36,7 +36,7 @@ const Reports = () => {
             </Link>
           </Col>
           <Col sm={4}>
-          <Link to="/HandleByMeFilter"  style={{textDecoration:"none"}}><Card >
+          <Link to="/HandleByMe"  style={{textDecoration:"none"}}><Card >
               <Card.Body>
                 <Card.Title>JDs handled by me</Card.Title>
               </Card.Body>

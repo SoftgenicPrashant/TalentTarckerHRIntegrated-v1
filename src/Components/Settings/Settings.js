@@ -49,58 +49,7 @@ const Settings = () => {
                        </Form>
                    
                 </Tab>
-                <Tab eventKey="Email Setup" title="Email Setup">
-                    <h5 className='mt-2 mb-2'>Email Setup</h5>
-                   <Form>
-                       <Row>
-                           <Col xs={6}>
-                            <Form.Group className='mb-3'>
-                                <Form.Label>SMTP Hostname</Form.Label>
-                                <Form.Control type="text" value="mail.example.com" name="hostname" />
-                            </Form.Group>
-                           </Col>
-                           <Col xs={6}>
-                           <Form.Group className='mb-3'>
-                                <Form.Label>SMTP Usename</Form.Label>
-                                <Form.Control type="email" value="user@example.com" name="username" />
-                            </Form.Group>
-                               </Col>
-                       </Row>
-                       <Row>
-                           <Col xs={6}>
-                            <Form.Group className='mb-3'>
-                                <Form.Label>SMTP Password</Form.Label>
-                                <Form.Control type="password" value="12344" name="pass" />
-                            </Form.Group>
-                           </Col>
-                           <Col xs={6}>
-                           <Form.Group className='mb-3'>
-                                <Form.Label>SMTP Post (Default: 25)</Form.Label>
-                                <Form.Control type="number" value="124" name="post" />
-                            </Form.Group>
-                               </Col>
-                       </Row>
-                       <Row>
-                           <Col xs={6}>
-                            <Form.Group className='mb-3'>
-                                <Form.Label>SMTP Sender Name</Form.Label>
-                                <Form.Control type="text" value="prashant" name="sender" />
-                            </Form.Group>
-                           </Col>
-                           <Col xs={6}>
-                           <Form.Group className='mb-3'>
-                                <Form.Label>SSL?</Form.Label>
-                                    <div className='d-flex'>
-                                    <Form.Check type='radio' label="yes" value="yes" />
-                                    <Form.Check type='radio' label="No" value="no" />
-                                    </div>
-                            </Form.Group>
-                               </Col>
-                       </Row>
-                       <Button className='mt-3'>Save</Button>
-                   </Form>
-                   </Tab>
-
+                
                 </Tabs>
                     </Card.Body>
                 </Card>

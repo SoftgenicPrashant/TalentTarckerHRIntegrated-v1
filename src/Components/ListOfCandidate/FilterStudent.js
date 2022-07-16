@@ -1,20 +1,37 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Sidebar from '../Sidebar/Sidebar'
 import NavbarMenu from '../NavbarMenu/NavbarMenu'
-import { Button, Col, Container , Row, Form} from 'react-bootstrap'
+import { Button, Col, Container , Row ,Form ,Tooltip,OverlayTrigger} from 'react-bootstrap'
 import CreatableSelect from 'react-select/creatable';
 import { ActionMeta, OnChangeValue } from 'react-select';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Link } from 'react-router-dom';
 const FilterStudent = () => {
-    const options=[
-        {label:"Negotiable", value:"Negotiable"},
-        {label:"Non-Negotiable", value:"Non-Negotiable"},
-    ]
-    const option1=[
-        {label:"Yes", value:"Yes"},
-        {label:"No", value:"No"},
-    ]
+    const [showskill, setshowskill]=useState(false);
+    const handleShowskill = ()=> setshowskill(!showskill)
+    const [showdropdown, setshowdropdown] =useState(false);
+ const handleShowdropdown = () => 
+   setshowdropdown(!showdropdown)
+   const [show4, setShow4] = useState(false);
+   const handleClose4 = () => setShow4(false);
+   const handleShow4 = () => setShow4(true);
+   const [show3, setShow3] = useState(false);
+   const handleClose3 = () => setShow3(false);
+   const handleShow3 = () => setShow3(true);
+   const options = [
+    {label:"Virtual/Telephonic- Any mutually decided time. (this week/next week)", value:"Virtual/Telephonic- Any mutually decided time. (this week/next week)"},
+    {label:"F2F- Any mutually decided time (this week/next week)", value:"F2F- Any mutually decided time (this week/next week)"},
+    {label:"Create", value:""}
+  ]
+    // const options=[
+    //     {label:"Negotiable", value:"Negotiable"},
+    //     {label:"Non-Negotiable", value:"Non-Negotiable"},
+    // ]
+    // const option1=[
+    //     {label:"Yes", value:"Yes"},
+    //     {label:"No", value:"No"},
+    // ]
     const   handleChange = (
         newValue: OnChangeValue<ColourOption, false>,
         actionMeta: ActionMeta<ColourOption>
@@ -35,103 +52,78 @@ const FilterStudent = () => {
         <Sidebar />
         <NavbarMenu />
         <div className='people'>
-          <h4 className='mt-5 text-muted text-center mt-5'>Filter Student List</h4>
+          <h4 className='mt-5 text-muted text-center mt-5'>Filter Candidates List</h4>
    
         <Container className='search-contact'>
-            <Row>
-            <Col md={4}>
-                        <h6 class="fw-bold">Candidate ID </h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-                        <Col md={4}>
-                        <h6 class="fw-bold">JD number  </h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-                        <Col md={4}>
-                        <h6 class="fw-bold">Client name</h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-            </Row>
-            <Row className='mt-3'>
-            <Col md={4}>
-                        <h6 class="fw-bold">JD title  </h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-                        <Col md={4}>
-                        <h6 class="fw-bold">Recruiter ID   </h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-                        <Col md={4}>
-                        <h6 class="fw-bold">optional</h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                options={options}
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-            </Row>
-            <Row className='mt-3'>
-            <Col md={4}>
-                        <h6 class="fw-bold">Total experience </h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-                        <Col md={4}>
-                        <h6 class="fw-bold">JD sent to candidate</h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                options={option1}
-                            />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-            </Row>
+            
+            <Form>
+        <Row>
+            <Col xs={12}>
+              <Form.Group className='mt-2 mb-2'>
+                <Form.Label className='fw-bold'>Candidate ID </Form.Label>
+                <Form.Control type='text' name="alphnumericid" placeholder='(8 digit alpha numeric ID generated by system)' />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={4}>
+              <Form.Group>
+                <Form.Label className='fw-bold mb-3'>JD number </Form.Label>
+                <Form.Control type="text" defaultValue="1" />
+              </Form.Group>
+            </Col>
+            <Col xs={4}>
+              <Form.Group>
+                <Form.Label className='fw-bold mb-3'>Client name </Form.Label>
+                <Form.Control type="text" defaultValue="Pkrs" />
+              </Form.Group>
+            </Col>
+            <Col xs={4}>
+              <Form.Group>
+                <Form.Label className='fw-bold mb-3'>JD title  </Form.Label>
+                <Form.Control type="text" defaultValue="testing" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={4}>
+              <Form.Group className='mt-3'>
+                <Form.Label className='fw-bold mb-3'>JD location </Form.Label>
+                <Form.Control type="text" defaultValue="India" />
+              </Form.Group>
+            </Col>
+           
+            <Col xs={4}>
+              <Form.Group className='mt-3'>
+                <Form.Label className='fw-bold mb-3'>Candidate name  </Form.Label>
+                <Form.Control type="text" defaultValue="Prashant Kumar" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
+              <Form.Group className='mt-3'>
+                <Form.Label className='fw-bold'>Date and Time of adding a candidate</Form.Label>
+                <div className='d-flex'>
+                  <Row>
+                    <Col xs={6}>
+                    <Form.Label className='fw-bold'>From</Form.Label>
+                    <Form.Control type="date" />
+
+                    </Col>
+                    <Col xs={6}>
+                    <Form.Label className='fw-bold'>To</Form.Label>
+                    <Form.Control type="date" />
+
+                    </Col>
+                  </Row>
+                </div>
+              </Form.Group>
+            </Col>
+          </Row>
+         
+
+        </Form>
         </Container>
         </div>
         <div className='d-flex justify-content-center title-absolute py-4 border-top'>

@@ -11,9 +11,16 @@ const options = [
   
   ]
   const options1 = [
-    { value: ' India', label:'India'},
-    { value: ' USA', label:'USA'},
-    { value: ' Africa', label:'Africa'},
+    { value: 'Patna', label:'Patna'},
+    { value: 'Ranchi', label:'Ranchi'},
+    { value: 'Delhi', label:'Delhi'},
+    {value:'Punjab', label:'Punjab'},
+    {value:'Pune', label:'Pune'},
+    {value:'Hydrabaad', label:'Hydrabaad'},
+    {value:'Haryana', label:'Haryana'},
+    {value:'Gujrat', label:'Gujrat'},
+    {value:'Bhopal', label:'Bhopal'},
+    {value:'Chennai', label:'Chennai'},
   
   ]
   const options2 = [
@@ -73,22 +80,14 @@ const People = () => {
         <Sidebar />
         <NavbarMenu />
         <div className='people'>
-          <h6 className='mt-5 text-muted text-center mt-5'>Search Potential Contacts.</h6>
+          
    
         <Container className='search-contact'>
             <form>
                 <div className='p-3 form-div' >
                   <Row>
-                    <Col xs={6}>
-                    <Form.Group>
-                    <Form.Label className='fw-bold'>CVs quality check required by Admin? (Y/N)</Form.Label>
-                    <div className='d-flex'>
-                    <Form.Check type="radio" name="cvcheck" label="YES" value="yes" />
-                    <Form.Check type="radio" name="cvcheck" label="NO" value="No" className='mx-3' />
-                    </div>
-                  </Form.Group>
-                    </Col>
-                    <Col xs={6}>
+
+                    <Col sm={6}>
                       <Form.Group>
                         <Form.Label className='fw-bold'> JD upload date-time </Form.Label>
                         <Row>
@@ -101,21 +100,21 @@ const People = () => {
                         
                       </Form.Group>
                     </Col>
-                  </Row>
-                  <br></br>
-                    <Row>
-                        <Col md={4}>
-                        <h6 class="fw-bold">Industry</h6>
+                    <Col sm={6}>
+                      <h6 className="fw-bold mt-1">JD status</h6>
                         <CreatableSelect
                                 isMulti
                                 isClearable
                                 onChange={handleChange}
                                 onInputChange={handleInputChange}
-                                options={options}
+                                options={JDstatus}
                             />
-                            <small>Use tab/enter for multi selection.</small>
-                        </Col>
-                        <Col md={4}>
+                      </Col>
+                  </Row>
+                  <br></br>
+                    <Row>
+                        
+                        <Col sm={4}>
                       
                       <h6 class="fw-bold">Client Name</h6>
                 
@@ -128,11 +127,19 @@ const People = () => {
                             />
                             <small>Use tab/enter for multi selection.</small>
                         </Col>
-                    </Row>
-                    <br></br>
-                    <Row>
-                      <Col xs={4}>
-                      <h6 class="fw-bold"> work location of JD</h6>
+                        <Col sm={4}>
+                        <h6 class="fw-bold">Industry</h6>
+                        <CreatableSelect
+                                isMulti
+                                isClearable
+                                onChange={handleChange}
+                                onInputChange={handleInputChange}
+                                options={options}
+                            />
+                            <small>Use tab/enter for multi selection.</small>
+                        </Col>
+                        <Col sm={4}>
+                      <h6 class="fw-bold"> Work location of JD</h6>
                         <CreatableSelect
                                 isMulti
                                 isClearable
@@ -141,7 +148,11 @@ const People = () => {
                                 options={options1}
                             />
                       </Col>
-                      <Col xs={4}>
+                    </Row>
+                    <br></br>
+                    <Row>
+                     
+                      <Col sm={4}>
                       <h6 class="fw-bold"> Sign up rate with client</h6>
                         <CreatableSelect
                                 isMulti
@@ -151,7 +162,7 @@ const People = () => {
                                 options={options2}
                             />
                       </Col>
-                      <Col xs={4}>
+                      <Col sm={4}>
                       <h6 class="fw-bold"> Salary</h6>
                         <CreatableSelect
                                 isMulti
@@ -161,11 +172,8 @@ const People = () => {
                                 options={options}
                             />
                       </Col>
-                    </Row>
-                    <br></br>
-                    <Row>
-                      <Col xs={4}>
-                      <h6 class="fw-bold">Payment terms</h6>
+                      <Col sm={4}>
+                      <h6 className="fw-bold">Payment terms</h6>
                         <CreatableSelect
                                 isClearable
                                 onChange={handleChange}
@@ -173,8 +181,12 @@ const People = () => {
                                 options={paymentterms}
                             />
                       </Col>
-                      <Col xs={4}>
-                      <h6 class="fw-bold">My payout</h6>
+                    </Row>
+                    <br></br>
+                    <Row>
+     
+                      <Col sm={4}>
+                      <h6 className="fw-bold">My payout</h6>
                         <CreatableSelect
                                 isMulti
                                 isClearable
@@ -183,20 +195,11 @@ const People = () => {
                                 options={Yourpayout}
                             />
                       </Col>
-                      <Col xs={4}>
-                      <h6 class="fw-bold">JD status</h6>
-                        <CreatableSelect
-                                isMulti
-                                isClearable
-                                onChange={handleChange}
-                                onInputChange={handleInputChange}
-                                options={JDstatus}
-                            />
-                      </Col>
+
                     </Row>
                     <br></br>
                     <Row>
-                      <Col xs={6}>
+                      <Col sm={6}>
                         <Form.Group>
                           <Form.Label className='fw-bold'>Client coordination to be done by whom?</Form.Label>
                           <div className='d-flex'>
@@ -206,6 +209,15 @@ const People = () => {
 
                         </Form.Group>
                       </Col>
+                      <Col sm={6}>
+                    <Form.Group>
+                    <Form.Label className='fw-bold'>CVs quality check required by Admin? (Y/N)</Form.Label>
+                    <div className='d-flex'>
+                    <Form.Check type="radio" name="cvcheck" label="YES" value="yes" />
+                    <Form.Check type="radio" name="cvcheck" label="NO" value="No" className='mx-3' />
+                    </div>
+                  </Form.Group>
+                    </Col>
                     </Row>
                 </div>
                     <div className='d-flex justify-content-center title-absolute py-4 border-top'>
