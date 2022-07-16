@@ -87,7 +87,7 @@
 .data-table {
     height: calc(100vh - 215px) !important; 
 
-    width: 150rem !important;
+    width: 170rem !important;
     scrollbar-color: rgb(101, 101, 246) !important;
 }
 .table-data{
@@ -104,6 +104,7 @@
     font-size: small;
     word-wrap:normal;
     font-weight: 0;  
+    padding-top: 3 !important;
 }
 .table>:not(caption)>*>* {
     padding-bottom: 0 !important;
